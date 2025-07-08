@@ -51,7 +51,7 @@ Asegúrate de tener [Node.js](https://nodejs.org/) (versión 18 o superior) inst
 
 1.  **Clona el repositorio:**
     ```bash
-    git clone <URL_DEL_REPOSITORIO>
+    git clone [https://github.com/rodrip13/losciclosdemarha-course-platform.git](https://github.com/rodrip13/losciclosdemarha-course-platform.git)
     cd Toti-cursos
     ```
 
