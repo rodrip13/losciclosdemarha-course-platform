@@ -2,21 +2,21 @@ import { Course } from '../types/course';
 
 export const mockCourse: Course = {
   id: '1',
-  title: 'Desarrollo Web Completo con React',
-  description: 'Aprende React desde cero hasta nivel avanzado con proyectos reales y recursos descargables',
-  thumbnail: 'https://images.pexels.com/photos/11035380/pexels-photo-11035380.jpeg?auto=compress&cs=tinysrgb&w=800',
-  duration: '12h 30m',
+  title: 'Titulo de cursos de Marhita',
+  description: 'Aprende todo lo que Marha te quiere enseñar y ademas con recursos descargables',
+  thumbnail: 'public/images/portada-video.jpg',
+  duration: '4 semanas',
   modules: [
     {
       id: 'm1',
-      title: 'Fundamentos de React',
-      description: 'Conceptos básicos y configuración inicial',
+      title: 'Fundamentos de la embarazada',
+      description: 'Conceptos básicos y lineamientos iniciales del curso',
       order: 1,
       lessons: [
         {
           id: 'l1',
-          title: 'Introducción a React',
-          description: 'Qué es React y por qué usarlo en el desarrollo web moderno',
+          title: 'Introducción',
+          description: 'Qué es ser madre',
           videoUrl: 'dQw4w9WgXcQ',
           duration: '15:30',
           order: 1,
@@ -24,24 +24,24 @@ export const mockCourse: Course = {
           resources: [
             {
               id: 'r1',
-              title: 'Guía de instalación React',
+              title: 'Guía de embarazo',
               type: 'pdf',
               url: '#',
               description: 'Documento PDF con pasos detallados'
             },
             {
               id: 'r2',
-              title: 'Documentación oficial',
+              title: 'Link a un blog',
               type: 'link',
-              url: 'https://react.dev',
-              description: 'Enlace a la documentación oficial de React'
+              url: 'https://losciclosdemarha.uy',
+              description: 'Enlace a la página oficial del curso'
             }
           ]
         },
         {
           id: 'l2',
-          title: 'Configuración del entorno',
-          description: 'Instalación y configuración de herramientas de desarrollo',
+          title: 'Configuración del embarazo',
+          description: 'Configuración y herramientas de desarrollo',
           videoUrl: 'dQw4w9WgXcQ',
           duration: '22:15',
           order: 2,
@@ -49,17 +49,17 @@ export const mockCourse: Course = {
           resources: [
             {
               id: 'r3',
-              title: 'Plantilla de proyecto',
+              title: 'Plantilla de guias',
               type: 'download',
               url: '#',
-              description: 'Archivo ZIP con configuración inicial'
+              description: 'Archivo ZIP con guias iniciales'
             }
           ]
         },
         {
           id: 'l3',
-          title: 'Tu primer componente',
-          description: 'Creando y entendiendo la estructura de componentes',
+          title: 'Tu primer Bebe',
+          description: 'Creando y entendiendo la vida',
           videoUrl: 'dQw4w9WgXcQ',
           duration: '18:45',
           order: 3,
@@ -69,14 +69,14 @@ export const mockCourse: Course = {
     },
     {
       id: 'm2',
-      title: 'Componentes y Props',
-      description: 'Creación y uso de componentes reutilizables',
+      title: 'Nace un bebe, nace una familia',
+      description: 'Creación y uso de los bebes',
       order: 2,
       lessons: [
         {
           id: 'l4',
-          title: 'Props y comunicación entre componentes',
-          description: 'Cómo pasar datos entre componentes padre e hijo',
+          title: 'Titulo 1',
+          description: 'Descripcion del titulo 1',
           videoUrl: 'dQw4w9WgXcQ',
           duration: '25:30',
           order: 1,
@@ -87,14 +87,14 @@ export const mockCourse: Course = {
               title: 'Ejercicios prácticos',
               type: 'pdf',
               url: '#',
-              description: 'Ejercicios para practicar props'
+              description: 'Ejercicios para practicar'
             }
           ]
         },
         {
           id: 'l5',
-          title: 'Estado y eventos',
-          description: 'Manejo del estado local y eventos en React',
+          title: 'Estado del bebe',
+          description: 'Manejo del bebe y su entorno',
           videoUrl: 'dQw4w9WgXcQ',
           duration: '28:15',
           order: 2,
@@ -104,14 +104,14 @@ export const mockCourse: Course = {
     },
     {
       id: 'm3',
-      title: 'Hooks y Estado Global',
-      description: 'Hooks de React y manejo de estado avanzado',
+      title: 'La familia crece',
+      description: 'Eventos que no anticipaste',
       order: 3,
       lessons: [
         {
           id: 'l6',
-          title: 'useState y useEffect',
-          description: 'Los hooks más importantes de React',
+          title: 'Visitas familiares',
+          description: 'Se abordan las visitas y su manejo',
           videoUrl: 'dQw4w9WgXcQ',
           duration: '32:20',
           order: 1,
@@ -119,8 +119,8 @@ export const mockCourse: Course = {
         },
         {
           id: 'l7',
-          title: 'Context API',
-          description: 'Compartir estado entre componentes sin prop drilling',
+          title: 'Contexto familiar',
+          description: 'Conocer el entorno del bebe',
           videoUrl: 'dQw4w9WgXcQ',
           duration: '26:45',
           order: 2,
