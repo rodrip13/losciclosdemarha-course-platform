@@ -4,7 +4,7 @@ export const mockCourse: Course = {
   id: '1',
   title: 'Titulo de cursos de Marhita',
   description: 'Aprende todo lo que Marha te quiere enseñar y ademas con recursos descargables',
-  thumbnail: 'public/images/portada-video.jpg',
+  thumbnail: 'images/portada-video.jpg',
   duration: '4 semanas',
   modules: [
     {
