@@ -30,7 +30,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
           <div className="inline-flex items-center justify-center w-16 h-16 bg-contessa-600 rounded-2xl mb-4 shadow-lg">
             <BookOpen className="w-8 h-8 text-white" />
           </div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Cursos - Los ciclos de Marha</h1>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Curso - Los ciclos de Marha</h1>
           <p className="text-gray-600">Accede a los cursos dictador por Marha Scanu</p>
         </div>
 
@@ -38,7 +38,6 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
         <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
           <div className="mb-6">
             <h2 className="text-2xl font-bold text-gray-900 mb-2">Iniciar Sesión</h2>
-            <p className="text-gray-600">Ingresa tus credenciales para continuar</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">

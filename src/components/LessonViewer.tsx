@@ -30,7 +30,7 @@ const LessonViewer: React.FC<LessonViewerProps> = ({
       case 'pdf':
         return <FileText className="w-5 h-5 text-red-600" />;
       case 'download':
-        return <Download className="w-5 h-5 text-blue-600" />;
+        return <Download className="w-5 h-5 text-contessa-600" />;
       case 'link':
         return <ExternalLink className="w-5 h-5 text-green-600" />;
       default:
@@ -74,7 +74,7 @@ const LessonViewer: React.FC<LessonViewerProps> = ({
             disabled={!hasNext}
             className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors ${
               hasNext 
-                ? 'bg-blue-600 hover:bg-blue-700 text-white' 
+                ? 'bg-contessa-600 hover:bg-contessa-700 text-white' 
                 : 'bg-gray-50 text-gray-400 cursor-not-allowed'
             }`}
           >
@@ -113,7 +113,7 @@ const LessonViewer: React.FC<LessonViewerProps> = ({
               ) : (
                 <button
                   onClick={markAsCompleted}
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-colors"
+                  className="bg-contessa-600 hover:bg-contessa-700 text-white px-6 py-2 rounded-lg font-medium transition-colors"
                 >
                   Marcar como completada
                 </button>
@@ -134,7 +134,7 @@ const LessonViewer: React.FC<LessonViewerProps> = ({
       {lesson.resources && lesson.resources.length > 0 && (
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
           <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-            <Download className="w-5 h-5 mr-2 text-blue-600" />
+            <Download className="w-5 h-5 mr-2 text-contessa-600" />
             Recursos de la Lección
           </h2>
           
@@ -151,14 +151,14 @@ const LessonViewer: React.FC<LessonViewerProps> = ({
                   {getResourceIcon(resource.type)}
                 </div>
                 <div className="flex-1">
-                  <h3 className="font-medium text-gray-900 group-hover:text-blue-600 transition-colors">
+                  <h3 className="font-medium text-gray-900 group-hover:text-contessa-600 transition-colors">
                     {resource.title}
                   </h3>
                   {resource.description && (
                     <p className="text-sm text-gray-600 mt-1">{resource.description}</p>
                   )}
                 </div>
-                <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-blue-600 transition-colors" />
+                <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-contessa-600 transition-colors" />
               </a>
             ))}
           </div>

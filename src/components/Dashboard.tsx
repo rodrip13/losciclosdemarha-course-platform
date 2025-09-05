@@ -126,8 +126,8 @@ const Dashboard: React.FC = () => {
       {/* Quick Actions */}
       <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl p-6 text-white">
         <h3 className="text-xl font-semibold mb-2">¿Listo para crear contenido?</h3>
-        <p className="text-blue-100 mb-4">Sube nuevos videos y organiza tus lecciones de manera efectiva</p>
-        <button className="bg-white text-blue-600 px-6 py-2 rounded-lg font-medium hover:bg-blue-50 transition-colors">
+        <p className="text-contessa-100 mb-4">Sube nuevos videos y organiza tus lecciones de manera efectiva</p>
+        <button className="bg-white text-contessa-600 px-6 py-2 rounded-lg font-medium hover:bg-blue-50 transition-colors">
           Crear Nuevo Curso
         </button>
       </div>

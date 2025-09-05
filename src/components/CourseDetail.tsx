@@ -45,7 +45,7 @@ const CourseDetail: React.FC<CourseDetailProps> = ({ course, onBack }) => {
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <div className="bg-white rounded-lg border border-gray-200 p-4">
           <div className="flex items-center space-x-2">
-            <Users className="w-5 h-5 text-blue-600" />
+            <Users className="w-5 h-5 text-contessa-600" />
             <span className="text-sm text-gray-600">Estudiantes</span>
           </div>
           <p className="text-2xl font-bold text-gray-900 mt-1">{course.studentsCount}</p>
@@ -125,7 +125,7 @@ const CourseDetail: React.FC<CourseDetailProps> = ({ course, onBack }) => {
           <div className="p-6 border-b border-gray-200">
             <div className="flex items-center justify-between">
               <h3 className="text-lg font-semibold text-gray-900">Contenido del Curso</h3>
-              <button className="text-blue-600 hover:text-blue-700 p-1 rounded transition-colors">
+              <button className="text-contessa-600 hover:text-contessa-700 p-1 rounded transition-colors">
                 <Plus className="w-5 h-5" />
               </button>
             </div>

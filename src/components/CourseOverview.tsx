@@ -55,7 +55,7 @@ const CourseOverview: React.FC<CourseOverviewProps> = ({ course, onStartCourse }
             {/* CTA Button */}
             <button
               onClick={onStartCourse}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl text-lg font-semibold flex items-center space-x-3 mx-auto transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+              className="bg-contessa-600 hover:bg-contessa-700 text-white px-8 py-4 rounded-xl text-lg font-semibold flex items-center space-x-3 mx-auto transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
             >
               <Play className="w-6 h-6" />
               <span>{completedLessons > 0 ? 'Continuar Curso' : 'Comenzar Curso'}</span>
@@ -78,7 +78,7 @@ const CourseOverview: React.FC<CourseOverviewProps> = ({ course, onStartCourse }
                 onClick={onStartCourse}
                 className="bg-white bg-opacity-90 hover:bg-opacity-100 rounded-full p-6 transition-all duration-200 transform hover:scale-110"
               >
-                <Play className="w-12 h-12 text-blue-600" />
+                <Play className="w-12 h-12 text-contessa-600" />
               </button>
             </div>
           </div>

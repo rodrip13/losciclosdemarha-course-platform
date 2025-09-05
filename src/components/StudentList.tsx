@@ -26,7 +26,7 @@ const StudentList: React.FC = () => {
 
   const getProgressColor = (progress: number) => {
     if (progress >= 80) return 'text-green-600 bg-green-100';
-    if (progress >= 60) return 'text-blue-600 bg-blue-100';
+    if (progress >= 60) return 'text-contessa-600 bg-blue-100';
     if (progress >= 40) return 'text-yellow-600 bg-yellow-100';
     return 'text-red-600 bg-red-100';
   };
@@ -83,7 +83,7 @@ const StudentList: React.FC = () => {
               <p className="text-2xl font-bold text-gray-900 mt-1">{mockStudents.length}</p>
             </div>
             <div className="bg-blue-100 p-3 rounded-lg">
-              <TrendingUp className="w-6 h-6 text-blue-600" />
+              <TrendingUp className="w-6 h-6 text-contessa-600" />
             </div>
           </div>
         </div>
@@ -166,7 +166,7 @@ const StudentList: React.FC = () => {
                   </td>
                   <td className="py-4 px-6">
                     <div className="flex items-center space-x-2">
-                      <button className="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+                      <button className="p-2 text-gray-400 hover:text-contessa-600 hover:bg-blue-50 rounded-lg transition-colors">
                         <Mail className="w-4 h-4" />
                       </button>
                       <button className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">

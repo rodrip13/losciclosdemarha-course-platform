@@ -36,12 +36,12 @@ const Sidebar: React.FC<SidebarProps> = ({
           onClick={onHomeClick}
           className="flex items-center space-x-3 mb-4 hover:bg-gray-50 p-2 rounded-lg transition-colors w-full"
         >
-          <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
+          <div className="w-10 h-10 bg-contessa-600 rounded-lg flex items-center justify-center">
             <BookOpen className="w-6 h-6 text-white" />
           </div>
           <div className="text-left">
-            <h1 className="text-lg font-bold text-gray-900">EduPlatform</h1>
-            <p className="text-gray-500 text-sm">Mi Curso</p>
+            <h1 className="text-lg font-bold text-gray-900">Los ciclos de Marha</h1>
+            <p className="text-gray-500 text-sm">Nombre del Curso</p>
           </div>
         </button>
         
@@ -53,7 +53,7 @@ const Sidebar: React.FC<SidebarProps> = ({
           </div>
           <div className="w-full bg-gray-200 rounded-full h-2">
             <div
-              className="bg-blue-600 h-2 rounded-full transition-all duration-300"
+              className="bg-contessa-600 h-2 rounded-full transition-all duration-300"
               style={{ width: `${(completedLessons / totalLessons) * 100}%` }}
             ></div>
           </div>
@@ -81,8 +81,8 @@ const Sidebar: React.FC<SidebarProps> = ({
                   <button
                     key={lesson.id}
                     onClick={() => onLessonSelect(lesson.id)}
-                    className={`w-full text-left p-3 hover:bg-blue-50 transition-colors ${
-                      selectedLessonId === lesson.id ? 'bg-blue-50 border-r-4 border-r-blue-600' : ''
+                    className={`w-full text-left p-3 hover:bg-contessa-50 transition-colors ${
+                      selectedLessonId === lesson.id ? 'bg-contessa-50 border-r-4 border-r-contessa-600' : ''
                     }`}
                   >
                     <div className="flex items-start space-x-3">
@@ -96,8 +96,8 @@ const Sidebar: React.FC<SidebarProps> = ({
                         <p className="text-xs text-gray-600 mt-1">{lesson.duration}</p>
                         {lesson.resources && lesson.resources.length > 0 && (
                           <div className="flex items-center mt-1">
-                            <Download className="w-3 h-3 text-blue-600 mr-1" />
-                            <span className="text-xs text-blue-600">{lesson.resources.length} recursos</span>
+                            <Download className="w-3 h-3 text-contessa-600 mr-1" />
+                            <span className="text-xs text-contessa-600">{lesson.resources.length} recursos</span>
                           </div>
                         )}
                       </div>
