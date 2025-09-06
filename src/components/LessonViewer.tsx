@@ -1,6 +1,8 @@
 import React from 'react';
 import { ArrowLeft, CheckCircle, Download, ExternalLink, FileText, ChevronRight, ChevronLeft } from 'lucide-react';
 import { Course, Lesson } from '../types/course';
+import { logEvent } from '../lib/tracking';
+import YouTubePlayer from './YouTubePlayer';
 
 interface LessonViewerProps {
   course: Course;
@@ -38,9 +40,13 @@ const LessonViewer: React.FC<LessonViewerProps> = ({
     }
   };
 
-  const markAsCompleted = () => {
+  const markAsCompleted = async () => {
     // Aquí implementarías la lógica para marcar como completada
     console.log('Marcar lección como completada:', lesson.id);
+    await logEvent('LESSON_COMPLETE', {
+      lesson_id: lesson.id,
+      course_id: course.id,
+    });
   };
 
   return (
@@ -87,14 +93,11 @@ const LessonViewer: React.FC<LessonViewerProps> = ({
       {/* Video Player */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
         <div className="aspect-video bg-black">
-          <iframe
-            src={getYouTubeEmbedUrl(lesson.videoUrl)}
-            title={lesson.title}
-            className="w-full h-full"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
+          <YouTubePlayer
+            videoId={lesson.videoUrl}
+            courseId={course.id}
+            lessonId={lesson.id}
+          />
         </div>
         
         {/* Lesson Info */}
@@ -145,6 +148,7 @@ const LessonViewer: React.FC<LessonViewerProps> = ({
                 href={resource.url}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => logEvent('DOWNLOAD', { resource_id: resource.id, lesson_id: lesson.id, course_id: course.id })}
                 className="flex items-center space-x-4 p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors group"
               >
                 <div className="flex-shrink-0">
