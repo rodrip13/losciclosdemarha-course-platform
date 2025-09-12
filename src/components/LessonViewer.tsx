@@ -10,6 +10,7 @@ interface LessonViewerProps {
   onPrevLesson: () => void;
   hasNext: boolean;
   hasPrev: boolean;
+  onToggleLessonComplete: (lessonId: string) => void;
 }
 
 const LessonViewer: React.FC<LessonViewerProps> = ({ 
@@ -19,7 +20,8 @@ const LessonViewer: React.FC<LessonViewerProps> = ({
   onNextLesson, 
   onPrevLesson,
   hasNext,
-  hasPrev 
+  hasPrev,
+  onToggleLessonComplete
 }) => {
   const getYouTubeEmbedUrl = (videoId: string) => {
     return `https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1`;
@@ -48,7 +50,7 @@ const LessonViewer: React.FC<LessonViewerProps> = ({
 
   const markAsCompleted = () => {
     // Aquí implementarías la lógica para marcar como completada
-    console.log('Marcar lección como completada:', lesson.id);
+    onToggleLessonComplete(lesson.id);
   };
 
   return (
