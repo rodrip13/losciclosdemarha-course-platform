@@ -29,7 +29,7 @@ export interface Lesson {
 export interface Resource {
   id: string;
   title: string;
-  type: 'pdf' | 'link' | 'download';
+  type: 'pdf' | 'link' | 'download' | 'audio' | 'video' | 'quiz' | 'exercise';
   url: string;
   description?: string;
 }

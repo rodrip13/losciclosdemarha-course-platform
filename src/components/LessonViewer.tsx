@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowLeft, CheckCircle, Download, ExternalLink, FileText, ChevronRight, ChevronLeft } from 'lucide-react';
+import { ArrowLeft, CheckCircle, Download, ExternalLink, FileText, ChevronRight, ChevronLeft, FileAudio, Video, HelpCircle, ScrollText } from 'lucide-react';
 import { Course, Lesson } from '../types/course';
 
 interface LessonViewerProps {
@@ -33,6 +33,14 @@ const LessonViewer: React.FC<LessonViewerProps> = ({
         return <Download className="w-5 h-5 text-contessa-600" />;
       case 'link':
         return <ExternalLink className="w-5 h-5 text-green-600" />;
+        case 'audio':
+        return <FileAudio className="w-5 h-5 text-purple-600" />;
+      case 'video':
+        return <Video className="w-5 h-5 text-blue-600" />;
+      case 'quiz':
+        return <HelpCircle className="w-5 h-5 text-yellow-600" />;
+      case 'exercise':
+        return <ScrollText className="w-5 h-5 text-pink-600" />;
       default:
         return <FileText className="w-5 h-5 text-gray-600" />;
     }

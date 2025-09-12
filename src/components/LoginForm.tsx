@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
-import { BookOpen, Eye, EyeOff, Mail, Lock, ArrowRight } from 'lucide-react';
+import React, { useState } from "react";
+import { BookOpen, Eye, EyeOff, Mail, Lock, ArrowRight } from "lucide-react";
 
 interface LoginFormProps {
   onLogin: (email: string, password: string) => void;
 }
 
 const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    
+
     // Simular delay de autenticación
     setTimeout(() => {
       onLogin(email, password);
@@ -30,20 +30,29 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
           <div className="inline-flex items-center justify-center w-16 h-16 bg-contessa-600 rounded-2xl mb-4 shadow-lg">
             <BookOpen className="w-8 h-8 text-white" />
           </div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Curso - Los ciclos de Marha</h1>
-          <p className="text-gray-600">Accede a los cursos dictador por Marha Scanu</p>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+            Curso - Los ciclos de Marha
+          </h1>
+          <p className="text-gray-600">
+            Accede a los cursos dictador por Marha Scanu
+          </p>
         </div>
 
         {/* Formulario de Login */}
         <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
           <div className="mb-6">
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">Iniciar Sesión</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-2">
+              Iniciar Sesión
+            </h2>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Campo Email */}
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700 mb-2"
+              >
                 Correo Electrónico
               </label>
               <div className="relative">
@@ -64,7 +73,10 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
 
             {/* Campo Password */}
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-700 mb-2"
+              >
                 Contraseña
               </label>
               <div className="relative">
@@ -73,7 +85,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
                 </div>
                 <input
                   id="password"
-                  type={showPassword ? 'text' : 'password'}
+                  type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="block w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-contessa-500 focus:border-transparent transition-colors placeholder-gray-400"
@@ -102,7 +114,10 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
                   type="checkbox"
                   className="h-4 w-4 text-contessa-600 focus:ring-contessa-500 border-gray-300 rounded"
                 />
-                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700">
+                <label
+                  htmlFor="remember-me"
+                  className="ml-2 block text-sm text-gray-700"
+                >
                   Recordarme
                 </label>
               </div>
@@ -136,10 +151,16 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
 
           {/* Demo credentials */}
           <div className="mt-6 p-4 bg-contessa-50 rounded-lg border border-contessa-200">
-            <p className="text-sm text-contessa-800 font-medium mb-2">Credenciales de demostración:</p>
+            <p className="text-sm text-contessa-800 font-medium mb-2">
+              Credenciales de demostración:
+            </p>
             <div className="text-sm text-contessa-700 space-y-1">
-              <p><strong>Email:</strong> estudiante@demo.com</p>
-              <p><strong>Contraseña:</strong> demo123</p>
+              <p>
+                <strong>Email:</strong> rodrip@demo.com
+              </p>
+              <p>
+                <strong>Contraseña:</strong> rodrip
+              </p>
             </div>
           </div>
         </div>
@@ -147,7 +168,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
         {/* Footer */}
         <div className="text-center mt-8">
           <p className="text-gray-500 text-sm">
-            ¿No tienes una cuenta?{' '}
+            ¿No tienes una cuenta?{" "}
             <button className="text-contessa-600 hover:text-contessa-700 font-medium transition-colors">
               Contacta al instructor
             </button>

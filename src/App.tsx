@@ -19,10 +19,10 @@ function App() {
   const handleLogin = (email: string, password: string) => {
     // Aquí implementarías la lógica de autenticación real
     // Por ahora, aceptamos las credenciales de demo
-    if (email === 'estudiante@demo.com' && password === 'demo123') {
+    if (email === 'rodrip@demo.com' && password === 'rodrip') {
       setIsAuthenticated(true);
     } else {
-      alert('Credenciales incorrectas. Usa: estudiante@demo.com / demo123');
+      alert('Credenciales incorrectas. Usa: rodrip@demo.com / rodrip');
     }
   };
 
