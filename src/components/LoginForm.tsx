@@ -1,25 +1,29 @@
 import React, { useState } from 'react';
 import { BookOpen, Eye, EyeOff, Mail, Lock, ArrowRight } from 'lucide-react';
+import { supabase } from '../supabaseClient';
 
-interface LoginFormProps {
-  onLogin: (email: string, password: string) => void;
-}
-
-const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
+const LoginForm: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
+    setError(null);
+
+    const { error } = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password,
+    });
+
+    if (error) {
+      setError(error.message);
+    }
     
-    // Simular delay de autenticación
-    setTimeout(() => {
-      onLogin(email, password);
-      setIsLoading(false);
-    }, 1500);
+    setIsLoading(false);
   };
 
   return (
@@ -41,6 +45,11 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
+            {error && (
+              <div className="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
+                {error}
+              </div>
+            )}
             {/* Campo Email */}
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">

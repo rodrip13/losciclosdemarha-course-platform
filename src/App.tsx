@@ -1,30 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Sidebar from './components/Sidebar';
 import CourseOverview from './components/CourseOverview';
 import LessonViewer from './components/LessonViewer';
 import LoginForm from './components/LoginForm';
 import { mockCourse } from './data/mockData';
 import { Lesson } from './types/course';
+import { supabase } from './supabaseClient';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [currentView, setCurrentView] = useState<'overview' | 'lesson'>('overview');
   const [selectedLesson, setSelectedLesson] = useState<Lesson | null>(null);
 
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setIsAuthenticated(!!session);
+    });
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setIsAuthenticated(!!session);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
   // Obtener todas las lecciones en orden
   const allLessons = mockCourse.modules.flatMap(module => 
     module.lessons.sort((a, b) => a.order - b.order)
   );
-
-  const handleLogin = (email: string, password: string) => {
-    // Aquí implementarías la lógica de autenticación real
-    // Por ahora, aceptamos las credenciales de demo
-    if (email === 'estudiante@demo.com' && password === 'demo123') {
-      setIsAuthenticated(true);
-    } else {
-      alert('Credenciales incorrectas. Usa: estudiante@demo.com / demo123');
-    }
-  };
 
   const handleStartCourse = () => {
     // Buscar la primera lección no completada o la primera lección
@@ -81,7 +86,7 @@ function App() {
 
   // Si no está autenticado, mostrar login
   if (!isAuthenticated) {
-    return <LoginForm onLogin={handleLogin} />;
+    return <LoginForm />;
   }
 
   // Si está en la vista overview, mostrar solo el overview
