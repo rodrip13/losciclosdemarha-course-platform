@@ -1,26 +1,72 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import Sidebar from "./components/Sidebar";
 import CourseOverview from "./components/CourseOverview";
 import LessonViewer from "./components/LessonViewer";
 import LoginForm from "./components/LoginForm";
+import RegisterForm from "./components/RegisterForm";
 import { mockCourse } from "./data/mockData";
 import { Lesson } from "./types/course";
 import { Course } from "./types/course";
+import { useAuth } from "./context/AuthContext";
+import { registerLessonCompletion, getCompletedLessons } from "./api/userActivity";
+import Spinner from "./components/Spinner";
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [currentView, setCurrentView] = useState<"overview" | "lesson">(
-    "overview"
-  );
+  const { session, user, loading } = useAuth();
+  // Importante: todos los hooks deben declararse siempre en el mismo orden
+  const [currentView, setCurrentView] = useState<"overview" | "lesson">("overview");
   const [selectedLesson, setSelectedLesson] = useState<Lesson | null>(null);
   const [course, setCourse] = useState<Course>(mockCourse);
+
+
+  // Cargar progreso de lecciones completadas al iniciar sesión
+  useEffect(() => {
+    const fetchCompleted = async () => {
+      if (!user) return;
+      const completedIds = await getCompletedLessons(user.id);
+      setCourse((prevCourse) => {
+        // Asegura que todas las lecciones tengan el campo completed
+        const newCourse = { ...prevCourse };
+        newCourse.modules = newCourse.modules.map((module) => ({
+          ...module,
+          lessons: module.lessons.map((lesson) => ({
+            ...lesson,
+            completed: completedIds.includes(lesson.id),
+          })),
+        }));
+        return newCourse;
+      });
+    };
+    fetchCompleted();
+  }, [user, mockCourse]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-contessa-100 via-contessa-200 to-contessa-300">
+        <div className="text-center">
+          <Spinner />
+          <p className="mt-4 text-gray-700 font-medium">Verificando autenticación...</p>
+          <p className="mt-2 text-sm text-gray-600">Esto solo debería tomar unos segundos</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!session) {
+    // Routing manual: mostrar RegisterForm en /registro-curso
+    if (window.location.pathname === "/registro-curso") {
+      return <RegisterForm />;
+    }
+    return <LoginForm />;
+  }
 
   // Obtener todas las lecciones en orden
   const allLessons = course.modules.flatMap((module) =>
     module.lessons.sort((a, b) => a.order - b.order)
   );
 
-  const handleToggleLessonComplete = (lessonId: string) => {
+  const handleToggleLessonComplete = async (lessonId: string) => {
+    if (!user) return;
     const newCourse = { ...course };
     const moduleIndex = newCourse.modules.findIndex((m) =>
       m.lessons.some((l) => l.id === lessonId)
@@ -33,19 +79,12 @@ function App() {
     if (lessonIndex === -1) return;
 
     const lesson = newCourse.modules[moduleIndex].lessons[lessonIndex];
-    lesson.completed = !lesson.completed;
-
-    setCourse(newCourse);
-  };
-
-  const handleLogin = (email: string, password: string) => {
-    // Aquí implementarías la lógica de autenticación real
-    // Por ahora, aceptamos las credenciales de demo
-    if (email === "rodrip@demo.com" && password === "rodrip") {
-      setIsAuthenticated(true);
-    } else {
-      alert("Credenciales incorrectas. Usa: rodrip@demo.com / rodrip");
+    // Si ya está completada, no registrar de nuevo
+    if (!lesson.completed) {
+      await registerLessonCompletion(user.id, lessonId);
     }
+    lesson.completed = !lesson.completed;
+    setCourse(newCourse);
   };
 
   const handleStartCourse = () => {
@@ -105,11 +144,6 @@ function App() {
     const currentIndex = getCurrentLessonIndex();
     return currentIndex > 0;
   };
-
-  // Si no está autenticado, mostrar login
-  if (!isAuthenticated) {
-    return <LoginForm onLogin={handleLogin} />;
-  }
 
   // Si está en la vista overview, mostrar solo el overview
   if (currentView === "overview") {

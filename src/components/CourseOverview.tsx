@@ -15,7 +15,7 @@ const CourseOverview: React.FC<CourseOverviewProps> = ({ course, onStartCourse }
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+    <div className="min-h-screen bg-gradient-to-br  from-contessa-50 via-contessa-100 to-contessa-300">
       {/* Hero Section */}
       <div className="relative overflow-hidden">
         <div className="max-w-4xl mx-auto px-6 py-16">
