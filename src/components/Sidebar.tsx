@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { 
   BookOpen, 
-  Home,
   FileText,
   Download,
   CheckCircle,
@@ -16,13 +15,17 @@ interface SidebarProps {
   selectedLessonId: string | null;
   onLessonSelect: (lessonId: string) => void;
   onHomeClick: () => void;
+  isOpen?: boolean;
+  onClose?: () => void;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ 
   course, 
   selectedLessonId, 
   onLessonSelect,
-  onHomeClick 
+  onHomeClick,
+  isOpen = false,
+  onClose
 }) => {
   const { user, signOut } = useAuth();
   const totalLessons = course.modules.reduce((acc, module) => acc + module.lessons.length, 0);
@@ -42,11 +45,26 @@ const Sidebar: React.FC<SidebarProps> = ({
   };
 
   return (
-    <div className="w-80 bg-white border-r border-gray-200 h-screen fixed left-0 top-0 z-40 flex flex-col justify-between overflow-y-auto">
+    <div className={`
+      fixed lg:relative
+      inset-y-0 left-0
+      z-40
+      w-80
+      bg-white
+      border-r border-gray-200
+      h-screen
+      flex flex-col justify-between
+      overflow-y-auto
+      transform transition-transform duration-300 ease-in-out
+      ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+    `}>
       {/* Header */}
       <div className="p-6 border-b border-gray-200">
         <button 
-          onClick={onHomeClick}
+          onClick={() => {
+            onHomeClick();
+            onClose?.();
+          }}
           className="flex items-center space-x-3 mb-4 hover:bg-gray-50 p-2 rounded-lg transition-colors w-full"
         >
           <div className="w-10 h-10 bg-contessa-600 rounded-lg flex items-center justify-center">

@@ -17,6 +17,7 @@ function App() {
   const [currentView, setCurrentView] = useState<"overview" | "lesson">("overview");
   const [selectedLesson, setSelectedLesson] = useState<Lesson | null>(null);
   const [course, setCourse] = useState<Course>(mockCourse);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
 
   // Cargar progreso de lecciones completadas al iniciar sesión
@@ -102,6 +103,8 @@ function App() {
     if (lesson) {
       setSelectedLesson(lesson);
       setCurrentView("lesson");
+      // Cerrar sidebar en mobile después de seleccionar
+      setSidebarOpen(false);
     }
   };
 
@@ -154,14 +157,25 @@ function App() {
 
   // Vista de lección con sidebar
   return (
-    <div className="min-h-screen bg-gray-50 flex">
+    <div className="min-h-screen bg-gray-50 flex relative">
+      {/* Overlay backdrop para mobile */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-30 lg:hidden"
+          onClick={() => setSidebarOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+      
       <Sidebar
         course={course}
         selectedLessonId={selectedLesson?.id || null}
         onLessonSelect={handleLessonSelect}
         onHomeClick={handleBackToOverview}
+        isOpen={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
       />
-      <main className="ml-80 flex-1 p-8">
+      <main className="flex-1 flex flex-col">
         {selectedLesson && (
           <LessonViewer
             course={course}
@@ -172,6 +186,7 @@ function App() {
             hasNext={hasNextLesson()}
             hasPrev={hasPrevLesson()}
             onToggleLessonComplete={handleToggleLessonComplete}
+            onToggleSidebar={() => setSidebarOpen(!sidebarOpen)}
           />
         )}
       </main>

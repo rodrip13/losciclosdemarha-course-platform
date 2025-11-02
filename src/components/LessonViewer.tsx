@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowLeft, CheckCircle, Download, ExternalLink, FileText, ChevronRight, ChevronLeft, FileAudio, Video, HelpCircle, ScrollText } from 'lucide-react';
+import { ArrowLeft, CheckCircle, Download, ExternalLink, FileText, ChevronRight, ChevronLeft, FileAudio, Video, HelpCircle, ScrollText, Menu } from 'lucide-react';
 import { Course, Lesson } from '../types/course';
 
 interface LessonViewerProps {
@@ -11,17 +11,18 @@ interface LessonViewerProps {
   hasNext: boolean;
   hasPrev: boolean;
   onToggleLessonComplete: (lessonId: string) => void;
+  onToggleSidebar?: () => void;
 }
 
 const LessonViewer: React.FC<LessonViewerProps> = ({ 
-  course, 
   lesson, 
   onBack, 
   onNextLesson, 
   onPrevLesson,
   hasNext,
   hasPrev,
-  onToggleLessonComplete
+  onToggleLessonComplete,
+  onToggleSidebar
 }) => {
   const getYouTubeEmbedUrl = (videoId: string) => {
     return `https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1`;
@@ -54,48 +55,51 @@ const LessonViewer: React.FC<LessonViewerProps> = ({
   };
 
   return (
-        <div className="space-y-6">
+        <div className="space-y-6 p-4 sm:p-6 lg:p-6">
           {/* Header */}
-          <div className="flex items-center justify-between">
-            <button
-              onClick={onBack}
-              className="flex items-center space-x-2 text-gray-600 hover:text-gray-900 transition-colors"
-            >
-              <ArrowLeft className="w-5 h-5" />
-              <span>Volver al curso</span>
-            </button>
-            
-            <div className="flex items-center space-x-4">
+          <div className="flex flex-col sm:justify-between gap-4">
+            <div className="flex justify-between sm:justify-between md:justify-between lg:justify-end gap-2">
+              {/* Hamburguesa visible solo en mobile (lg: hidden) */}
               <button
-                onClick={onPrevLesson}
-                disabled={!hasPrev}
-                className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors ${
-                  hasPrev 
-                    ? 'bg-gray-100 hover:bg-gray-200 text-gray-700' 
-                    : 'bg-gray-50 text-gray-400 cursor-not-allowed'
-                }`}
+                onClick={onToggleSidebar}
+                className="lg:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                title="Abrir menú"
               >
-                <ChevronLeft className="w-4 h-4" />
-                <span>Anterior</span>
+                <Menu className="w-6 h-6 text-gray-700" />
               </button>
-              
-              <button
-                onClick={onNextLesson}
-                disabled={!hasNext}
-                className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors ${
-                  hasNext 
-                    ? 'bg-contessa-600 hover:bg-contessa-700 text-white' 
-                    : 'bg-gray-50 text-gray-400 cursor-not-allowed'
-                }`}
-              >
-                <span>Siguiente</span>
-                <ChevronRight className="w-4 h-4" />
-              </button>
+
+              <div className="flex gap-2">
+                <button
+                  onClick={onPrevLesson}
+                  disabled={!hasPrev}
+                  className={`flex items-center space-x-2 px-3 sm:px-4 py-2 rounded-lg transition-colors text-sm sm:text-base ${
+                    hasPrev 
+                      ? 'bg-gray-100 hover:bg-gray-200 text-gray-700' 
+                      : 'bg-gray-50 text-gray-400 cursor-not-allowed'
+                  }`}
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                  <span className="hidden sm:inline">Anterior</span>
+                </button>
+                
+                <button
+                  onClick={onNextLesson}
+                  disabled={!hasNext}
+                  className={`flex items-center space-x-2 px-3 sm:px-4 py-2 rounded-lg transition-colors text-sm sm:text-base ${
+                    hasNext 
+                      ? 'bg-contessa-600 hover:bg-contessa-700 text-white' 
+                      : 'bg-gray-50 text-gray-400 cursor-not-allowed'
+                  }`}
+                >
+                  <span className="hidden sm:inline">Siguiente</span>
+                  <ChevronRight className="w-4 h-4" />
+                </button>
+              </div>
             </div>
           </div>
 
           {/* Video Player */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+          <div className="bg-white rounded-lg sm:rounded-xl shadow-sm border border-gray-200 overflow-hidden">
             <div className="aspect-video bg-black">
               <iframe
                 src={getYouTubeEmbedUrl(lesson.videoUrl)}
@@ -108,30 +112,30 @@ const LessonViewer: React.FC<LessonViewerProps> = ({
             </div>
             
             {/* Lesson Info */}
-            <div className="p-6">
-              <div className="flex items-start justify-between mb-4">
+            <div className="p-4 sm:p-6">
+              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-4">
                 <div className="flex-1">
-                  <h1 className="text-2xl font-bold text-gray-900 mb-2">{lesson.title}</h1>
-                  <p className="text-gray-600 leading-relaxed">{lesson.description}</p>
+                  <h1 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">{lesson.title}</h1>
+                  <p className="text-gray-600 leading-relaxed text-sm sm:text-base">{lesson.description}</p>
                 </div>
-                <div className="ml-6 flex-shrink-0">
+                <div className="flex-shrink-0 w-full sm:w-auto">
                   {lesson.completed ? (
-                    <div className="flex items-center space-x-2 text-green-600 bg-green-50 px-4 py-2 rounded-lg">
+                    <div className="flex items-center justify-center sm:justify-end space-x-2 text-green-600 bg-green-50 px-4 py-2 rounded-lg">
                       <CheckCircle className="w-5 h-5" />
-                      <span className="font-medium">Completada</span>
+                      <span className="font-medium text-sm">Completada</span>
                     </div>
                   ) : (
                     <button
                       onClick={markAsCompleted}
-                      className="bg-contessa-600 hover:bg-contessa-700 text-white px-6 py-2 rounded-lg font-medium transition-colors"
+                      className="w-full sm:w-auto bg-contessa-600 hover:bg-contessa-700 text-white px-6 py-2 rounded-lg font-medium transition-colors text-sm sm:text-base"
                     >
-                      Marcar como completada
+                      Marcar completada
                     </button>
                   )}
                 </div>
               </div>
               
-              <div className="flex items-center space-x-6 text-sm text-gray-500 border-t border-gray-200 pt-4">
+              <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-xs sm:text-sm text-gray-500 border-t border-gray-200 pt-4">
                 <span>Duración: {lesson.duration}</span>
                 {lesson.resources && lesson.resources.length > 0 && (
                   <span>{lesson.resources.length} recursos disponibles</span>
@@ -142,33 +146,33 @@ const LessonViewer: React.FC<LessonViewerProps> = ({
 
           {/* Resources */}
           {lesson.resources && lesson.resources.length > 0 && (
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
+            <div className="bg-white rounded-lg sm:rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6">
+              <h2 className="text-lg sm:text-xl font-semibold text-gray-900 mb-4 flex items-center">
                 <Download className="w-5 h-5 mr-2 text-contessa-600" />
                 Recursos de la Lección
               </h2>
               
-              <div className="grid gap-3">
+              <div className="grid gap-2 sm:gap-3">
                 {lesson.resources.map((resource) => (
                   <a
                     key={resource.id}
                     href={resource.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center space-x-4 p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors group"
+                    className="flex items-center space-x-3 sm:space-x-4 p-3 sm:p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors group"
                   >
                     <div className="flex-shrink-0">
                       {getResourceIcon(resource.type)}
                     </div>
-                    <div className="flex-1">
-                      <h3 className="font-medium text-gray-900 group-hover:text-contessa-600 transition-colors">
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-medium text-gray-900 group-hover:text-contessa-600 transition-colors text-sm sm:text-base truncate">
                         {resource.title}
                       </h3>
                       {resource.description && (
-                        <p className="text-sm text-gray-600 mt-1">{resource.description}</p>
+                        <p className="text-xs sm:text-sm text-gray-600 mt-1 line-clamp-2">{resource.description}</p>
                       )}
                     </div>
-                    <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-contessa-600 transition-colors" />
+                    <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-contessa-600 transition-colors flex-shrink-0" />
                   </a>
                 ))}
               </div>
