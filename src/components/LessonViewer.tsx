@@ -28,6 +28,10 @@ const LessonViewer: React.FC<LessonViewerProps> = ({
     return `https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1`;
   };
 
+  const getPdfUrl = (pdfName: string) => {
+    return `/pdfs/${encodeURIComponent(pdfName)}`;
+  };
+
   const getResourceIcon = (type: string) => {
     switch (type) {
       case 'pdf':
@@ -163,7 +167,6 @@ const LessonViewer: React.FC<LessonViewerProps> = ({
               </div>
               
               <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-xs sm:text-sm text-gray-500 border-t border-gray-200 pt-4">
-                <span>Duración: {lesson.duration}</span>
                 {lesson.resources && lesson.resources.length > 0 && (
                   <span>{lesson.resources.length} recursos disponibles</span>
                 )}
@@ -183,7 +186,7 @@ const LessonViewer: React.FC<LessonViewerProps> = ({
                 {lesson.resources.map((resource) => (
                   <a
                     key={resource.id}
-                    href={resource.url}
+                    href={resource.type === 'pdf' ? getPdfUrl(resource.url) : resource.url}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center space-x-3 sm:space-x-4 p-3 sm:p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors group"
