@@ -9,37 +9,91 @@ import { Lesson } from "./types/course";
 import { Course } from "./types/course";
 import { useAuth } from "./context/AuthContext";
 import { registerLessonCompletion, getCompletedLessons } from "./api/userActivity";
+import { useUserProgress } from "./hooks/useUserProgress";
+import { getCompletedLessons as getLocalStorageCompletedLessons } from "./utils/storage";
 import Spinner from "./components/Spinner";
 
 function App() {
   const { session, user, loading } = useAuth();
+  const { markComplete, unmarkComplete } = useUserProgress(user?.email);
   // Importante: todos los hooks deben declararse siempre en el mismo orden
   const [currentView, setCurrentView] = useState<"overview" | "lesson">("overview");
   const [selectedLesson, setSelectedLesson] = useState<Lesson | null>(null);
   const [course, setCourse] = useState<Course>(mockCourse);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-
-  // Cargar progreso de lecciones completadas al iniciar sesión
+  // Cargar progreso de LocalStorage cuando el usuario está autenticado
   useEffect(() => {
-    const fetchCompleted = async () => {
-      if (!user) return;
-      const completedIds = await getCompletedLessons(user.id);
+    const loadProgressFromStorage = () => {
+      if (!user?.email) return;
+      
+      // Obtener lecciones completadas del LocalStorage
+      const localCompletedIds = getLocalStorageCompletedLessons(user.email);
+      
       setCourse((prevCourse) => {
-        // Asegura que todas las lecciones tengan el campo completed
         const newCourse = { ...prevCourse };
         newCourse.modules = newCourse.modules.map((module) => ({
           ...module,
           lessons: module.lessons.map((lesson) => ({
             ...lesson,
-            completed: completedIds.includes(lesson.id),
+            completed: localCompletedIds.includes(lesson.id),
           })),
         }));
         return newCourse;
       });
     };
-    fetchCompleted();
-  }, [user, mockCourse]);
+    
+    loadProgressFromStorage();
+  }, [user?.email]);
+
+  // Sincronizar con Supabase sin sobrescribir datos si falla
+  useEffect(() => {
+    const syncWithSupabase = async () => {
+      if (!user?.email) return;
+      
+      try {
+        // Obtener datos de Supabase
+        const supabaseCompletedIds = await getCompletedLessons(user.id);
+        const localCompletedIds = getLocalStorageCompletedLessons(user.email);
+        
+        // Merge: Tomar la versión con MÁS lecciones completadas
+        // (más reciente probablemente)
+        const mergedIds = Array.from(
+          new Set([...localCompletedIds, ...supabaseCompletedIds])
+        );
+        
+        // Solo actualizar si hay cambios
+        if (
+          mergedIds.length !== localCompletedIds.length ||
+          !mergedIds.every((id) => localCompletedIds.includes(id))
+        ) {
+          // Actualizar LocalStorage con el merge
+          mergedIds.forEach((lessonId) => {
+            markComplete(lessonId);
+          });
+          
+          // Actualizar UI
+          setCourse((prevCourse) => {
+            const newCourse = { ...prevCourse };
+            newCourse.modules = newCourse.modules.map((module) => ({
+              ...module,
+              lessons: module.lessons.map((lesson) => ({
+                ...lesson,
+                completed: mergedIds.includes(lesson.id),
+              })),
+            }));
+            return newCourse;
+          });
+        }
+      } catch (error) {
+        console.error("Error syncing with Supabase:", error);
+        // Si falla Supabase, NO hacer nada - mantener los datos de LocalStorage
+        // La experiencia NO se rompe
+      }
+    };
+    
+    syncWithSupabase();
+  }, [user, user?.email, markComplete]);
 
   if (loading) {
     return (
@@ -83,17 +137,29 @@ function App() {
     // Si ya está completada, no registrar de nuevo
     if (!lesson.completed) {
       await registerLessonCompletion(user.id, lessonId);
+      markComplete(lessonId);
+    } else {
+      unmarkComplete(lessonId);
     }
     lesson.completed = !lesson.completed;
     setCourse(newCourse);
   };
 
-  const handleStartCourse = () => {
-    // Buscar la primera lección no completada o la primera lección
-    const firstIncompleteLesson =
-      allLessons.find((lesson) => !lesson.completed) || allLessons[0];
-    if (firstIncompleteLesson) {
-      setSelectedLesson(firstIncompleteLesson);
+  const handleStartCourse = (moduleId?: string) => {
+    let targetLesson: Lesson | undefined;
+    
+    if (moduleId) {
+      // Si se especifica un módulo, obtener la primera lección de ese módulo
+      const module = course.modules.find((m) => m.id === moduleId);
+      targetLesson = module?.lessons[0];
+    } else {
+      // Si no se especifica módulo, buscar la primera lección no completada o la primera lección
+      targetLesson =
+        allLessons.find((lesson) => !lesson.completed) || allLessons[0];
+    }
+    
+    if (targetLesson) {
+      setSelectedLesson(targetLesson);
       setCurrentView("lesson");
     }
   };
