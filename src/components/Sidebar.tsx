@@ -71,8 +71,8 @@ const Sidebar: React.FC<SidebarProps> = ({
             <BookOpen className="w-6 h-6 text-white" />
           </div>
           <div className="text-left">
-            <h1 className="text-lg font-bold text-gray-900">Los ciclos de Marha</h1>
-            <p className="text-gray-500 text-sm">Nombre del Curso</p>
+            <h1 className="text-lg font-bold text-gray-900">Nacer acompañadas</h1>
+            <p className="text-gray-500 text-sm">Los ciclos de Marha</p>
           </div>
         </button>
         
