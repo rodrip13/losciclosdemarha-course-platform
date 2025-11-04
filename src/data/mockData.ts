@@ -25,13 +25,6 @@ export const mockCourse: Course = {
           resources: [
             {
               id: "r1",
-              title: "Tu hoja de ruta familiar: Cómo aprovechar al máximo estas 6 semanas",
-              type: "pdf",
-              url: "#",
-              description: "Documento PDF con pasos detallados",
-            },
-            {
-              id: "r2",
               title: "Link a mi blog",
               type: "link",
               url: "https://losciclosdemarha.uy/blog",
@@ -79,7 +72,7 @@ export const mockCourse: Course = {
         {
           id: "l4",
           title: "Clase en vivo",
-          description: "Vínculo con tu bebé: creando conexión con tu hijo/a desde la gestación.",
+          description: "Vínculo con tu bebé: creando conexión con tu hijo/a desde la gestación. Clase en vivo el 14 de noviembre a las 19:30",
           videoUrl: "",
           duration: "",
           order: 1,
@@ -249,6 +242,138 @@ export const mockCourse: Course = {
               url: "puerperio-inmediato.pdf",
               description: "Tus primeros 40 días como mamá. Guía completa para transitar tus cambios corporales y emocionales.",
             }
+          ],
+        },
+      ],
+    },
+    {
+      id: "m7",
+      title: "Final",
+      description: "Modulo final",
+      order: 5,
+      lessons: [
+        {
+          id: "l10",
+          title: "Clase en vivo -Final",
+          description: "Clase en vivo el 16 de diciembre a las 19:30 (quedará grabada y disponible en la plataforma) Puerperio. Una guía para transitar el postparto con herramientas.",
+          videoUrl: "JbAl14zs1SU",
+          duration: "",
+          order: 1,
+          completed: false,
+          resources: [
+          ],
+        },
+      ],
+    },
+        {
+      id: "m8",
+      title: "BONUS",
+      description: "Modulo Bonus",
+      order: 5,
+      lessons: [
+        {
+          id: "l11",
+          title: "Meditación",
+          description: "Meditación despedida de la panza grabada",
+          videoUrl: "",
+          duration: "",
+          order: 1,
+          completed: false,
+          resources: [
+            {
+              id: "r1",
+              title: "Meditación despedida de la panza grabada",
+              type: "audio",
+              url: "audios/despedida-de-la-panza.mp3",
+              description: "Meditación despedida de la panza grabada.",
+            },
+          ],
+        },
+        {
+          id: "l12",
+          title: "Bitácora de la familia.",
+          description: "Bitácora de la familia: manual imprimible de preparación completo para el nacimiento.",
+          videoUrl: "",
+          duration: "",
+          order: 1,
+          completed: false,
+          resources: [
+            {
+              id: "r1",
+              title: "Bitácora de la familia.",
+              type: "pdf",
+              url: "pdfs/bitacora-de-una-madre-que-nace.pdf",
+              description: "Bitácora de la familia: manual imprimible de preparación completo para el nacimiento.",
+            },
+          ],
+        },
+        {
+          id: "l13",
+          title: "Pack de afirmaciones imprimibles para embarazo, nacimiento y puerperio.",
+          description: "Pack de afirmaciones imprimibles para embarazo, nacimiento y puerperio.",
+          videoUrl: "",
+          duration: "",
+          order: 1,
+          completed: false,
+          resources: [
+            {
+              id: "r1",
+              title: "Pack de afirmaciones imprimibles para embarazo, nacimiento y puerperio.",
+              type: "pdf",
+              url: "pdfs/pack-de-afirmaciones-imprimibles.pdf",
+              description: "Pack de afirmaciones imprimibles para embarazo, nacimiento y puerperio.",
+            },
+          ],
+        },
+        {
+          id: "l14",
+          title: "Compras esenciales y presupuesto inteligente para el bebé.",
+          description: "Masterclass.",
+          videoUrl: "Rpj1D5ywTVM",
+          duration: "",
+          order: 1,
+          completed: false,
+          resources: [
+          ],
+        },
+        {
+          id: "l15",
+          title: "Guía para la comunicación y acuerdos con la pareja y la familia.",
+          description: "Para poder ser equipo de crianza, y además adaptarse a la nueva etapa sin generar distancia.",
+          videoUrl: "",
+          duration: "",
+          order: 1,
+          completed: false,
+          resources: [
+            {
+              id: "r1",
+              title: "Guía para la comunicación y acuerdos con la pareja y la familia.",
+              type: "pdf",
+              url: "pdfs/comunicacion-con-la-pareja.pdf",
+              description: "Guía para la comunicación y acuerdos con la pareja y la familia.",
+            },
+          ],
+        },
+        {
+          id: "l16",
+          title: "Minicurso: Primeros 30 días del bebé.",
+          description: "Primeros 30 días del bebé: lactancia, colecho sí o no, decisiones importantes y cuidados básicos.",
+          videoUrl: "RGQUYeC9F4g",
+          duration: "",
+          order: 1,
+          completed: false,
+          resources: [
+          ],
+        },
+        {
+          id: "l17",
+          title: "Cuidar a quien cuida: hablemos de puerperio",
+          description: "Taller en vivo online grupal.",
+          videoUrl: "",
+          duration: "",
+          order: 1,
+          completed: false,
+          resources: [
           ],
         },
       ],

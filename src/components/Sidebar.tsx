@@ -53,8 +53,8 @@ const Sidebar: React.FC<SidebarProps> = ({
       bg-white
       border-r border-gray-200
       h-screen
-      flex flex-col justify-between
-      overflow-y-auto
+      flex flex-col
+      overflow-hidden
       transform transition-transform duration-300 ease-in-out
       ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
     `}>
@@ -93,7 +93,7 @@ const Sidebar: React.FC<SidebarProps> = ({
       </div>
 
       {/* Course Content */}
-      <div>
+      <div className="flex-1 overflow-y-auto">
         <div className="p-4">
           <h3 className="text-sm font-semibold text-gray-900 mb-4 flex items-center">
             <FileText className="w-4 h-4 mr-2" />
