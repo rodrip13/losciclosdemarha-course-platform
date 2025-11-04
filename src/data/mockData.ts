@@ -92,7 +92,7 @@ export const mockCourse: Course = {
           title: "Habitar el cuerpo que gesta",
           description: "Conectar con el cuerpo gestante",
           videoUrl: "",
-          duration: "60:00",
+          duration: "",
           order: 2,
           completed: false,
           resources: [

@@ -4,7 +4,7 @@ import { Course } from '../types/course';
 
 interface CourseOverviewProps {
   course: Course;
-  onStartCourse: () => void;
+  onStartCourse: (moduleId?: string) => void;
 }
 
 const CourseOverview: React.FC<CourseOverviewProps> = ({ course, onStartCourse }) => {
@@ -54,7 +54,7 @@ const CourseOverview: React.FC<CourseOverviewProps> = ({ course, onStartCourse }
 
             {/* CTA Button */}
             <button
-              onClick={onStartCourse}
+              onClick={() => onStartCourse()}
               className="bg-contessa-600 hover:bg-contessa-700 text-white px-8 py-4 rounded-xl text-lg font-semibold flex items-center space-x-3 mx-auto transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
             >
               <Play className="w-6 h-6" />
@@ -75,7 +75,7 @@ const CourseOverview: React.FC<CourseOverviewProps> = ({ course, onStartCourse }
             />
             <div className="absolute inset-0 flex items-center justify-center">
               <button
-                onClick={onStartCourse}
+                onClick={() => onStartCourse()}
                 className="bg-white bg-opacity-90 hover:bg-opacity-100 rounded-full p-6 transition-all duration-200 transform hover:scale-110"
               >
                 <Play className="w-12 h-12 text-contessa-600" />
@@ -88,7 +88,11 @@ const CourseOverview: React.FC<CourseOverviewProps> = ({ course, onStartCourse }
             <h2 className="text-2xl font-bold text-gray-900 mb-6">Contenido del Curso</h2>
             <div className="grid gap-4">
               {course.modules.map((module, index) => (
-                <div key={module.id} className="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors">
+                <div
+                  key={module.id}
+                  onClick={() => onStartCourse(module.id)}
+                  className="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer hover:border-contessa-400 hover:shadow-md"
+                >
                   <div className="flex items-center justify-between">
                     <div>
                       <h3 className="font-semibold text-gray-900">
@@ -98,12 +102,6 @@ const CourseOverview: React.FC<CourseOverviewProps> = ({ course, onStartCourse }
                     </div>
                     <div className="text-right">
                       <p className="text-sm text-gray-500">{module.lessons.length} lecciones</p>
-                      <p className="text-xs text-gray-400">
-                        {module.lessons.reduce((acc, lesson) => {
-                          const [minutes, seconds] = lesson.duration.split(':').map(Number);
-                          return acc + minutes + (seconds / 60);
-                        }, 0).toFixed(0)} min
-                      </p>
                     </div>
                   </div>
                 </div>
