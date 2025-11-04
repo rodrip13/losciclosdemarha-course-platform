@@ -102,10 +102,10 @@ const LessonViewer: React.FC<LessonViewerProps> = ({
             </div>
           </div>
 
-          {/* Video Player or Content Placeholder */}
-          <div className="bg-white rounded-lg sm:rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-            <div className="aspect-square sm:aspect-video bg-gradient-to-br from-contessa-50 via-contessa-100 to-contessa-300 flex items-center justify-center">
-              {lesson.videoUrl ? (
+          {/* Video Player - Solo mostrar si hay videoUrl */}
+          {lesson.videoUrl && (
+            <div className="bg-white rounded-lg sm:rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+              <div className="aspect-square sm:aspect-video bg-gradient-to-br from-contessa-50 via-contessa-100 to-contessa-300 flex items-center justify-center">
                 <iframe
                   src={getYouTubeEmbedUrl(lesson.videoUrl)}
                   title={lesson.title}
@@ -114,63 +114,38 @@ const LessonViewer: React.FC<LessonViewerProps> = ({
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 ></iframe>
-              ) : (
-                <div className="flex flex-col items-center justify-center gap-3 p-6 text-center">
-                  <div className="bg-white rounded-full p-6 shadow-lg">
-                    <FileText className="w-12 h-12 text-contessa-600" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2">
-                      Contenido Teórico
-                    </h3>
-                    <p className="text-gray-600 text-sm sm:text-base max-w-sm">
-                      Esta lección se basa en contenido escrito y recursos descargables
-                    </p>
-                  </div>
-                  {lesson.resources && lesson.resources.length > 0 && (
-                    <a
-                      href={lesson.resources[0].url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-2 bg-contessa-600 hover:bg-contessa-700 text-white px-6 py-2 rounded-lg font-medium transition-colors text-sm sm:text-base mt-3"
-                    >
-                      {getResourceIcon(lesson.resources[0].type)}
-                      Ver primer recurso
-                    </a>
-                  )}
-                </div>
-              )}
-            </div>
-            
-            {/* Lesson Info */}
-            <div className="p-4 sm:p-6">
-              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-4">
-                <div className="flex-1">
-                  <h1 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">{lesson.title}</h1>
-                  <p className="text-gray-600 leading-relaxed text-sm sm:text-base">{lesson.description}</p>
-                </div>
-                <div className="flex-shrink-0 w-full sm:w-auto">
-                  {lesson.completed ? (
-                    <div className="flex items-center justify-center sm:justify-end space-x-2 text-green-600 bg-green-50 px-4 py-2 rounded-lg">
-                      <CheckCircle className="w-5 h-5" />
-                      <span className="font-medium text-sm">Completada</span>
-                    </div>
-                  ) : (
-                    <button
-                      onClick={markAsCompleted}
-                      className="w-full sm:w-auto bg-contessa-600 hover:bg-contessa-700 text-white px-6 py-2 rounded-lg font-medium transition-colors text-sm sm:text-base"
-                    >
-                      Marcar completada
-                    </button>
-                  )}
-                </div>
               </div>
-              
-              <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-xs sm:text-sm text-gray-500 border-t border-gray-200 pt-4">
-                {lesson.resources && lesson.resources.length > 0 && (
-                  <span>{lesson.resources.length} recursos disponibles</span>
+            </div>
+          )}
+
+          {/* Lesson Info */}
+          <div className="bg-white rounded-lg sm:rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6">
+            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-4">
+              <div className="flex-1">
+                <h1 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">{lesson.title}</h1>
+                <p className="text-gray-600 leading-relaxed text-sm sm:text-base">{lesson.description}</p>
+              </div>
+              <div className="flex-shrink-0 w-full sm:w-auto">
+                {lesson.completed ? (
+                  <div className="flex items-center justify-center sm:justify-end space-x-2 text-green-600 bg-green-50 px-4 py-2 rounded-lg">
+                    <CheckCircle className="w-5 h-5" />
+                    <span className="font-medium text-sm">Completada</span>
+                  </div>
+                ) : (
+                  <button
+                    onClick={markAsCompleted}
+                    className="w-full sm:w-auto bg-contessa-600 hover:bg-contessa-700 text-white px-6 py-2 rounded-lg font-medium transition-colors text-sm sm:text-base"
+                  >
+                    Marcar completada
+                  </button>
                 )}
               </div>
+            </div>
+            
+            <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-xs sm:text-sm text-gray-500 border-t border-gray-200 pt-4">
+              {lesson.resources && lesson.resources.length > 0 && (
+                <span>{lesson.resources.length} recursos disponibles</span>
+              )}
             </div>
           </div>
 

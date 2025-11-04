@@ -255,7 +255,7 @@ export const mockCourse: Course = {
         {
           id: "l10",
           title: "Clase en vivo -Final",
-          description: "Clase en vivo el 16 de diciembre a las 19:30 (quedará grabada y disponible en la plataforma) Puerperio. Una guía para transitar el postparto con herramientas.",
+          description: "Clase de preguntas y respuestas para cerrar la preparación.",
           videoUrl: "",
           duration: "",
           order: 1,
