@@ -98,17 +98,44 @@ const LessonViewer: React.FC<LessonViewerProps> = ({
             </div>
           </div>
 
-          {/* Video Player */}
+          {/* Video Player or Content Placeholder */}
           <div className="bg-white rounded-lg sm:rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-            <div className="aspect-video bg-black">
-              <iframe
-                src={getYouTubeEmbedUrl(lesson.videoUrl)}
-                title={lesson.title}
-                className="w-full h-full"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
+            <div className="aspect-square sm:aspect-video bg-gradient-to-br from-contessa-50 via-contessa-100 to-contessa-300 flex items-center justify-center">
+              {lesson.videoUrl ? (
+                <iframe
+                  src={getYouTubeEmbedUrl(lesson.videoUrl)}
+                  title={lesson.title}
+                  className="w-full h-full"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              ) : (
+                <div className="flex flex-col items-center justify-center gap-3 p-6 text-center">
+                  <div className="bg-white rounded-full p-6 shadow-lg">
+                    <FileText className="w-12 h-12 text-contessa-600" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2">
+                      Contenido Teórico
+                    </h3>
+                    <p className="text-gray-600 text-sm sm:text-base max-w-sm">
+                      Esta lección se basa en contenido escrito y recursos descargables
+                    </p>
+                  </div>
+                  {lesson.resources && lesson.resources.length > 0 && (
+                    <a
+                      href={lesson.resources[0].url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-2 bg-contessa-600 hover:bg-contessa-700 text-white px-6 py-2 rounded-lg font-medium transition-colors text-sm sm:text-base mt-3"
+                    >
+                      {getResourceIcon(lesson.resources[0].type)}
+                      Ver primer recurso
+                    </a>
+                  )}
+                </div>
+              )}
             </div>
             
             {/* Lesson Info */}

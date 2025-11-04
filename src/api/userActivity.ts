@@ -49,19 +49,12 @@ export interface DBResult<T = any> {
 
 // Obtiene los IDs de lecciones completadas por el usuario (CON CACHÉ)
 export async function getCompletedLessons(userId: string): Promise<string[]> {
-  console.log('📚 [GET COMPLETED] Buscando lecciones completadas...');
-  console.log('📚 [GET COMPLETED] User ID:', userId);
-  
   const cacheKey = getCacheKey('completed_lessons', userId);
   const cached = getCache<string[]>(cacheKey);
   
   if (cached) {
-    console.log('🚀 [GET COMPLETED] Cache HIT - Retornando datos en cache');
-    console.log('📦 [GET COMPLETED] Lecciones:', cached.length);
     return cached;
   }
-
-  console.log('📡 [GET COMPLETED] Cache MISS - Consultando base de datos...');
   
   try {
     const { data, error } = await supabase
@@ -75,15 +68,11 @@ export async function getCompletedLessons(userId: string): Promise<string[]> {
     }
     
     if (!data) {
-      console.warn('⚠️ [GET COMPLETED] Sin datos retornados');
       return [];
     }
     
     const result = data.map((row: { module_id: string }) => row.module_id);
     setCache(cacheKey, result, CACHE_TTL.COMPLETED_LESSONS);
-    
-    console.log('✅ [GET COMPLETED] Datos obtenidos y cacheados');
-    console.log('📦 [GET COMPLETED] Lecciones completadas:', result.length);
     
     return result;
   } catch (err) {
@@ -94,10 +83,6 @@ export async function getCompletedLessons(userId: string): Promise<string[]> {
 
 // Registra una lección como completada para un usuario
 export async function registerLessonCompletion(userId: string, lessonId: string): Promise<DBResult> {
-  console.log('✏️ [REGISTER COMPLETION] Registrando lección completada...');
-  console.log('✏️ [REGISTER COMPLETION] User ID:', userId);
-  console.log('✏️ [REGISTER COMPLETION] Lesson ID:', lessonId);
-  
   try {
     const { error, data } = await supabase.from("module_completions").insert({
       user_id: userId,
@@ -110,8 +95,6 @@ export async function registerLessonCompletion(userId: string, lessonId: string)
     }
     
     clearUserCache(userId);
-    console.log('🗑️ [REGISTER COMPLETION] Cache limpiado para usuario:', userId);
-    console.log('✅ [REGISTER COMPLETION] Lección registrada exitosamente');
     
     return { success: true, data };
   } catch (err) {
@@ -121,10 +104,6 @@ export async function registerLessonCompletion(userId: string, lessonId: string)
 }
 
 export async function registerSession(userId: string, userAgent: string): Promise<DBResult> {
-  console.log('🔓 [REGISTER SESSION] Registrando sesión de usuario...');
-  console.log('🔓 [REGISTER SESSION] User ID:', userId);
-  console.log('🔓 [REGISTER SESSION] User Agent:', userAgent.substring(0, 50) + '...');
-  
   try {
     const { error, data } = await supabase.from("user_sessions").insert({
       user_id: userId,
@@ -136,7 +115,6 @@ export async function registerSession(userId: string, userAgent: string): Promis
       return { success: false, error };
     }
     
-    console.log('✅ [REGISTER SESSION] Sesión registrada exitosamente');
     return { success: true, data };
   } catch (err) {
     console.error('❌ [REGISTER SESSION] Error inesperado:', err);
@@ -145,12 +123,7 @@ export async function registerSession(userId: string, userAgent: string): Promis
 }
 
 export async function closeSession(userId: string): Promise<DBResult> {
-  console.log('🔒 [CLOSE SESSION] Cerrando sesión de usuario...');
-  console.log('🔒 [CLOSE SESSION] User ID:', userId);
-  
   try {
-    console.log('🔍 [CLOSE SESSION] Buscando sesión abierta...');
-    
     const { data, error } = await supabase
       .from("user_sessions")
       .select("id, login_at")
@@ -166,13 +139,9 @@ export async function closeSession(userId: string): Promise<DBResult> {
     }
     
     if (data) {
-      console.log('📋 [CLOSE SESSION] Sesión encontrada, ID:', data.id);
-      
       const now = new Date();
       const loginAt = new Date(data.login_at);
       const duration = Math.floor((now.getTime() - loginAt.getTime()) / 1000);
-      
-      console.log('⏱️ [CLOSE SESSION] Duración de sesión:', duration, 'segundos');
       
       const { error: updateError, data: updateData } = await supabase
         .from("user_sessions")
@@ -187,11 +156,9 @@ export async function closeSession(userId: string): Promise<DBResult> {
         return { success: false, error: updateError };
       }
       
-      console.log('✅ [CLOSE SESSION] Sesión cerrada exitosamente');
       return { success: true, data: updateData };
     }
     
-    console.warn('⚠️ [CLOSE SESSION] No se encontró sesión abierta');
     return { success: false, error: new Error("Sesión abierta NO encontrada") };
   } catch (err) {
     console.error('❌ [CLOSE SESSION] Error inesperado:', err);

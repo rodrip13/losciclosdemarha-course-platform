@@ -8,14 +8,6 @@
  */
 
 export function clearSupabaseStorage(projectUrl?: string) {
-  console.log('🧹 [CLEAR STORAGE] Iniciando limpieza de localStorage...');
-  
-  if (projectUrl) {
-    console.log(`🎯 [CLEAR STORAGE] Modo específico: limpiando proyecto ${projectUrl}`);
-  } else {
-    console.log('🎯 [CLEAR STORAGE] Modo completo: limpiando TODOS los datos de Supabase');
-  }
-  
   const keysToRemove: string[] = [];
   
   // Buscar todas las keys relacionadas con Supabase
@@ -35,29 +27,18 @@ export function clearSupabaseStorage(projectUrl?: string) {
     }
   }
   
-  console.log(`🔍 [CLEAR STORAGE] Encontradas ${keysToRemove.length} keys de Supabase`);
-  
   if (keysToRemove.length > 0) {
-    console.log('📋 [CLEAR STORAGE] Keys a eliminar:', keysToRemove);
-    
     keysToRemove.forEach(key => {
       localStorage.removeItem(key);
-      console.log(`🗑️ [CLEAR STORAGE] Removida: ${key}`);
     });
-    
-    console.log('✅ [CLEAR STORAGE] Limpieza completada');
-    console.log('🔄 [CLEAR STORAGE] Recarga la página para aplicar cambios');
     
     return keysToRemove.length;
   } else {
-    console.log('ℹ️ [CLEAR STORAGE] No se encontraron keys de Supabase para limpiar');
     return 0;
   }
 }
 
 export function inspectSupabaseStorage() {
-  console.log('🔍 [INSPECT STORAGE] Inspeccionando localStorage...');
-  
   const supabaseKeys: { [key: string]: any } = {};
   
   for (let i = 0; i < localStorage.length; i++) {
@@ -72,10 +53,6 @@ export function inspectSupabaseStorage() {
     }
   }
   
-  console.log('📦 [INSPECT STORAGE] Datos de Supabase en localStorage:');
-  console.table(Object.keys(supabaseKeys));
-  console.log('📋 [INSPECT STORAGE] Detalles:', supabaseKeys);
-  
   return supabaseKeys;
 }
 
@@ -88,15 +65,7 @@ if (import.meta.env.DEV) {
     if (key && key.includes('supabase')) {
       const value = localStorage.getItem(key);
       if (value && value.includes(oldProjectUrl)) {
-        console.warn('🚨 [AUTO CLEAN] ¡PROYECTO VIEJO DETECTADO EN localStorage!');
-        console.warn('🚨 [AUTO CLEAN] URL antigua encontrada:', oldProjectUrl);
-        console.warn('🚨 [AUTO CLEAN] Esto está causando errores ERR_NAME_NOT_RESOLVED');
-        console.warn('🚨 [AUTO CLEAN] Limpiando automáticamente...');
-
-        // Limpiar TODOS los datos de Supabase para evitar conflictos
         clearSupabaseStorage();
-        console.warn('✅ [AUTO CLEAN] Limpieza automática completada');
-        console.warn('🔄 [AUTO CLEAN] Recarga la página si los errores persisten');
         break;
       }
     }
@@ -107,8 +76,4 @@ if (import.meta.env.DEV) {
 if (import.meta.env.DEV) {
   (window as any).clearSupabaseStorage = clearSupabaseStorage;
   (window as any).inspectSupabaseStorage = inspectSupabaseStorage;
-  console.log('🛠️ [DEV TOOLS] Funciones disponibles en consola:');
-  console.log('  - clearSupabaseStorage() - Limpiar TODOS los datos de Supabase');
-  console.log('  - clearSupabaseStorage("url-proyecto") - Limpiar proyecto específico');
-  console.log('  - inspectSupabaseStorage() - Inspeccionar datos almacenados');
 }

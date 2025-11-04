@@ -10,7 +10,7 @@ export const mockCourse: Course = {
   modules: [
     {
       id: "m1",
-      title: "1- Bienvenida al curso",
+      title: "Bienvenida al curso",
       description: "Bienvenida al curso - clase en vivo",
       order: 0,
       lessons: [
@@ -19,7 +19,7 @@ export const mockCourse: Course = {
           title: "Bienvenida",
           description:
             "Clase en vivo, para conocer a las familias y que ellas me conozcan a mí",
-          videoUrl: "dQw4w9WgXcQ",
+          videoUrl: "",
           duration: "15:00",
           order: 1,
           completed: false,
@@ -44,7 +44,7 @@ export const mockCourse: Course = {
           id: "l2",
           title: "Te hablo a ti, pareja o papá",
           description: "Entendiendo el rol del acompañante",
-          videoUrl: "dQw4w9WgXcQ",
+          videoUrl: "",
           duration: "10:00",
           order: 2,
           completed: false,

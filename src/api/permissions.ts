@@ -2,8 +2,6 @@ import { supabase } from './supabaseClient';
 
 // ===== OBTENER PERMISOS DE UN USUARIO =====
 export async function getUserPermissions(userId: string) {
-  console.log('🔐 [PERMISSIONS] Obteniendo permisos para:', userId);
-  
   try {
     const { data, error } = await supabase
       .from('profiles')
@@ -17,7 +15,6 @@ export async function getUserPermissions(userId: string) {
       return { permissions: ['access_courses'], error };
     }
 
-    console.log('✅ [PERMISSIONS] Permisos obtenidos:', data.permissions);
     return { permissions: data.permissions || ['access_courses'] };
   } catch (err) {
     console.error('❌ [PERMISSIONS] Error inesperado:', err);
@@ -30,12 +27,7 @@ export function hasPermission(
   permissions: string[],
   requiredPermission: string
 ): boolean {
-  const hasAccess = permissions.includes(requiredPermission);
-  console.log(
-    `🔑 [PERMISSIONS] ¿Tiene '${requiredPermission}'?`,
-    hasAccess ? '✅ SÍ' : '❌ NO'
-  );
-  return hasAccess;
+  return permissions.includes(requiredPermission);
 }
 
 // ===== VERIFICACIONES ESPECÍFICAS POR APP =====
@@ -59,8 +51,6 @@ export async function grantPermission(
   userId: string,
   permission: string
 ) {
-  console.log(`✅ [GRANT] Otorgando '${permission}' a usuario:`, userId);
-
   try {
     const { data, error } = await supabase
       .from('profiles')
@@ -88,7 +78,6 @@ export async function grantPermission(
       return { success: false, error: updateError };
     }
 
-    console.log('✅ [GRANT] Permiso otorgado:', updatedPermissions);
     return { success: true, permissions: updatedPermissions };
   } catch (err) {
     console.error('❌ [GRANT] Error inesperado:', err);
@@ -101,8 +90,6 @@ export async function revokePermission(
   userId: string,
   permission: string
 ) {
-  console.log(`❌ [REVOKE] Revocando '${permission}' de usuario:`, userId);
-
   try {
     const { data, error } = await supabase
       .from('profiles')
@@ -130,7 +117,6 @@ export async function revokePermission(
       return { success: false, error: updateError };
     }
 
-    console.log('✅ [REVOKE] Permiso revocado:', updatedPermissions);
     return { success: true, permissions: updatedPermissions };
   } catch (err) {
     console.error('❌ [REVOKE] Error inesperado:', err);
@@ -140,8 +126,6 @@ export async function revokePermission(
 
 // ===== OBTENER TODOS LOS USUARIOS CON UN PERMISO =====
 export async function getUsersWithPermission(permission: string) {
-  console.log(`🔍 [SEARCH] Buscando usuarios con permiso: '${permission}'`);
-
   try {
     const { data, error } = await supabase
       .from('profiles')
@@ -153,7 +137,6 @@ export async function getUsersWithPermission(permission: string) {
       return { success: false, users: [], error };
     }
 
-    console.log(`✅ [SEARCH] Encontrados ${data.length} usuarios`);
     return { success: true, users: data };
   } catch (err) {
     console.error('❌ [SEARCH] Error inesperado:', err);
@@ -163,8 +146,6 @@ export async function getUsersWithPermission(permission: string) {
 
 // ===== OBTENER PERFIL COMPLETO DEL USUARIO =====
 export async function getUserProfile(userId: string) {
-  console.log('👤 [PROFILE] Obteniendo perfil completo para:', userId);
-  
   try {
     const { data, error } = await supabase
       .from('profiles')
@@ -177,7 +158,6 @@ export async function getUserProfile(userId: string) {
       return { profile: null, error };
     }
 
-    console.log('✅ [PROFILE] Perfil obtenido:', data);
     return { profile: data };
   } catch (err) {
     console.error('❌ [PROFILE] Error inesperado:', err);
@@ -190,8 +170,6 @@ export async function updateUserProfile(
   userId: string,
   updates: { full_name?: string; avatar_url?: string }
 ) {
-  console.log('✏️ [PROFILE] Actualizando perfil de:', userId);
-  
   try {
     const { data, error } = await supabase
       .from('profiles')
@@ -208,7 +186,6 @@ export async function updateUserProfile(
       return { success: false, error };
     }
 
-    console.log('✅ [PROFILE] Perfil actualizado:', data);
     return { success: true, profile: data };
   } catch (err) {
     console.error('❌ [PROFILE] Error inesperado:', err);
