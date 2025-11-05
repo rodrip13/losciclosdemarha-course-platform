@@ -4,6 +4,7 @@ import CourseOverview from "./components/CourseOverview";
 import LessonViewer from "./components/LessonViewer";
 import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
+import AuthCallback from "./components/AuthCallback";
 import { mockCourse } from "./data/mockData";
 import { Lesson } from "./types/course";
 import { Course } from "./types/course";
@@ -107,11 +108,19 @@ function App() {
     );
   }
 
+  // Routing manual para páginas públicas
   if (!session) {
-    // Routing manual: mostrar RegisterForm en /registro-curso
+    // Página de callback de autenticación (pública)
+    if (window.location.pathname === "/auth/callback") {
+      return <AuthCallback />;
+    }
+    
+    // Página de registro
     if (window.location.pathname === "/registro-curso") {
       return <RegisterForm />;
     }
+    
+    // Página de login (por defecto)
     return <LoginForm />;
   }
 
