@@ -282,7 +282,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         email, 
         password,
         options: {
-          emailRedirectTo: `${window.location.origin}/auth/callback`,
+          emailRedirectTo: 'https://cursos.losciclosdemarha.uy/auth/callback',
         }
       });
       

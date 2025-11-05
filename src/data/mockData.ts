@@ -18,7 +18,7 @@ export const mockCourse: Course = {
           title: "Bienvenida al curso",
           description:
             "",
-          videoUrl: "",
+          videoUrl: "L9xyQSE0T-Y",
           duration: "",
           order: 1,
           completed: false,
@@ -36,18 +36,11 @@ export const mockCourse: Course = {
           id: "l2",
           title: "Te hablo a ti, pareja o papá",
           description: "Entendiendo el rol del acompañante",
-          videoUrl: "",
+          videoUrl: "Keo40e_lybM",
           duration: "",
           order: 2,
           completed: false,
           resources: [
-            {
-              id: "r3",
-              title: "Sobre el acompañante",
-              type: "link",
-              url: "losciclosdemarha.uy/blog",
-              description: "Blog con información para el acompañante",
-            },
           ],
         },
         {
