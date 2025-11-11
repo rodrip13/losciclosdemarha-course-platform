@@ -154,7 +154,7 @@ const LessonViewer: React.FC<LessonViewerProps> = ({
             <div className="bg-white rounded-lg sm:rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6">
               <h2 className="text-lg sm:text-xl font-semibold text-gray-900 mb-4 flex items-center">
                 <Download className="w-5 h-5 mr-2 text-contessa-600" />
-                Recursos de la Lección
+                Recursos
               </h2>
               
               <div className="grid gap-2 sm:gap-3">

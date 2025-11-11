@@ -5,7 +5,7 @@ export const mockCourse: Course = {
   title: "Nacer acompañadas",
   description: "Programa integral para antes, durante y después del nacimiento. Preparación integral para el nacimiento y el puerperio dirigida a familias. Basado en el Método Ciclos de Marha: Información clara + Trabajo corporal + Contención emocional.",
   thumbnail: "images/portada-video.jpg",
-  duration: "4 semanas",
+  duration: "6 semanas",
   modules: [
     {
       id: "m1",
@@ -25,7 +25,7 @@ export const mockCourse: Course = {
           resources: [
             {
               id: "r1",
-              title: "Link a mi blog",
+              title: "Blog de Los Ciclos de Marha",
               type: "link",
               url: "https://losciclosdemarha.uy/blog",
               description: "Enlace a mi blog personal",
@@ -41,19 +41,15 @@ export const mockCourse: Course = {
           order: 2,
           completed: false,
           resources: [
+            {
+              id: "r1",
+              title: "Link al post: Embarazo y crianza: el rol esencial del papá",
+              type: "link",
+              url: "https://losciclosdemarha.uy/blog/embarazo-y-crianza-el-rol-esencial-del-papa",
+              description: "Enlace a mi blog personal",
+            },
           ],
-        },
-        {
-          id: "l3",
-          title: "Clase en vivo",
-          description: "Clase en vivo, para conocer a las familias y que ellas me conozcan a mí - martes 11 de noviembre a las 19:30",
-          videoUrl: "",
-          duration: "",
-          order: 2,
-          completed: false,
-          resources: [
-          ],
-        },
+        }
       ],
     },
     {
@@ -116,7 +112,7 @@ export const mockCourse: Course = {
         {
           id: "l6",
           title: "Clase en vivo",
-          description: "Tu Cuerpo, Tu Aliado. Descubriendo tu poder natural para el nacimiento. -Clase en vivo el 21 de noviembre a las 19:30.",
+          description: "Tu Cuerpo, Tu Aliado. Descubriendo tu poder natural para el nacimiento. Clase en vivo el 21 de noviembre a las 19:30.",
           videoUrl: "",
           duration: "",
           order: 1,
@@ -148,8 +144,8 @@ export const mockCourse: Course = {
       lessons: [
         {
           id: "l7",
-          title: "Clase en vivo -Taller de nacimiento.",
-          description: "Clase en vivo el 28 de noviembre a las 19:30 (quedará grabada y disponible en la plataforma) Taller de Nacimiento",
+          title: "Clase en vivo - Todo sobre el nacimiento.",
+          description: "Clase en vivo el 28 de noviembre a las 19:30.",
           videoUrl: "",
           duration: "",
           order: 1,
@@ -188,8 +184,8 @@ export const mockCourse: Course = {
       lessons: [
         {
           id: "l8",
-          title: "Clase en vivo -Vuelta a casa. Tu hogar preparado para el bebé y vos.",
-          description: "Clase en vivo el 5 de diciembre a las 19:30 (quedará grabada y disponible en la plataforma) Vuelta a casa. Tu hogar preparado para el bebé y vos.",
+          title: "Clase en vivo - Vuelta a casa. Tu hogar preparado para el bebé y vos.",
+          description: "Clase en vivo el 5 de diciembre a las 19:30.",
           videoUrl: "",
           duration: "",
           order: 1,
@@ -214,8 +210,8 @@ export const mockCourse: Course = {
       lessons: [
         {
           id: "l9",
-          title: "Clase en vivo -Puerperio",
-          description: "Clase en vivo el 12 de diciembre a las 19:30 (quedará grabada y disponible en la plataforma) Puerperio. Una guía para transitar el postparto con herramientas.",
+          title: "Clase en vivo - Puerperio",
+          description: "Una guía para transitar el postparto con herramientas. Clase en vivo el 12 de diciembre a las 19:30.",
           videoUrl: "",
           duration: "",
           order: 1,
@@ -242,13 +238,13 @@ export const mockCourse: Course = {
     {
       id: "m7",
       title: "Final",
-      description: "Modulo final",
+      description: "Preguntas y respuestas + cierre del acompañamiento",
       order: 5,
       lessons: [
         {
           id: "l10",
-          title: "Clase en vivo -Final",
-          description: "Clase de preguntas y respuestas para cerrar la preparación.",
+          title: "Clase en vivo - Cierre del Acompañamiento",
+          description: "Clase de preguntas y respuestas para cerrar la preparación. Clase en vivo el 16 de diciembre a las 19:30",
           videoUrl: "",
           duration: "",
           order: 1,
@@ -261,7 +257,7 @@ export const mockCourse: Course = {
         {
       id: "m8",
       title: "BONUS",
-      description: "Modulo Bonus",
+      description: "Módulo complementario",
       order: 5,
       lessons: [
         {
@@ -295,7 +291,7 @@ export const mockCourse: Course = {
               id: "r1",
               title: "Bitácora de la familia.",
               type: "pdf",
-              url: "pdfs/bitacora-de-una-madre-que-nace.pdf",
+              url: "bitacora-de-una-madre-que-nace.pdf",
               description: "Bitácora de la familia: manual imprimible de preparación completo para el nacimiento.",
             },
           ],
@@ -313,7 +309,7 @@ export const mockCourse: Course = {
               id: "r1",
               title: "Pack de afirmaciones imprimibles para embarazo, nacimiento y puerperio.",
               type: "pdf",
-              url: "pdfs/pack-de-afirmaciones-imprimibles.pdf",
+              url: "pack-de-afirmaciones-imprimibles.pdf",
               description: "Pack de afirmaciones imprimibles para embarazo, nacimiento y puerperio.",
             },
           ],
@@ -342,7 +338,7 @@ export const mockCourse: Course = {
               id: "r1",
               title: "Guía para la comunicación y acuerdos con la pareja y la familia.",
               type: "pdf",
-              url: "pdfs/comunicacion-con-la-pareja.pdf",
+              url: "comunicacion-con-la-pareja.pdf",
               description: "Guía para la comunicación y acuerdos con la pareja y la familia.",
             },
           ],

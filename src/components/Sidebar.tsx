@@ -5,7 +5,8 @@ import {
   Download,
   CheckCircle,
   Circle,
-  LogOut
+  LogOut,
+  MessageCircle
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { Course } from '../types/course';
@@ -151,7 +152,18 @@ const Sidebar: React.FC<SidebarProps> = ({
       </div>
 
       {/* Footer: User info and logout */}
-      <div className="p-4 border-t border-gray-200 bg-white">
+      <div className="p-4 border-t border-gray-200 bg-white space-y-3">
+        {/* WhatsApp Support Button */}
+        <a
+          href="https://chat.whatsapp.com/ED539Xk06SG8vexxUoEYkn?mode=wwt"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center space-x-2 w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-2.5 px-4 rounded-lg transition-colors"
+        >
+          <MessageCircle className="w-5 h-5" />
+          <span>Grupo de Soporte</span>
+        </a>
+
         {user && (
           <div className="flex items-center justify-between">
             <div className="text-xs text-gray-600 truncate max-w-[140px]">
