@@ -51,10 +51,10 @@ const LoginForm: React.FC = ( ) => {
             <BookOpen className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            Curso - Los ciclos de Marha
+            Nacer Acompañadas
           </h1>
           <p className="text-gray-600">
-            Accede a los cursos dictador por Marha Scanu
+            Accede a los cursos dictados por Marha Scanu
           </p>
         </div>
 
@@ -190,20 +190,7 @@ const LoginForm: React.FC = ( ) => {
           </form>
         </div>
 
-        {/* Footer */}
-        <div className="text-center mt-8">
-          <p className="text-gray-500 text-sm">
-            ¿No tienes una cuenta?{" "}
-            <button 
-              onClick={() => {
-                window.location.href = "/registro-curso";
-              }}
-              className="text-contessa-600 hover:text-contessa-700 font-medium transition-colors"
-            >
-              Registrate aquí
-            </button>
-          </p>
-        </div>
+
       </div>
     </div>
   );
