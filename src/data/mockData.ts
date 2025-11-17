@@ -62,7 +62,7 @@ export const mockCourse: Course = {
           id: "l4",
           title: "Clase en vivo",
           description: "Vínculo con tu bebé: creando conexión con tu hijo/a desde la gestación. Clase en vivo el 14 de noviembre a las 19:30",
-          videoUrl: "",
+          videoUrl: "wKEuqid_U1g?si=5NI0otw6ZVfdW0uc",
           duration: "",
           order: 1,
           completed: false,
