@@ -113,7 +113,7 @@ export const mockCourse: Course = {
           id: "l6",
           title: "Clase en vivo",
           description: "Tu Cuerpo, Tu Aliado. Descubriendo tu poder natural para el nacimiento. Clase en vivo el 21 de noviembre a las 19:30.",
-          videoUrl: "",
+          videoUrl: "uIArezwnYQ4",
           duration: "",
           order: 1,
           completed: false,
