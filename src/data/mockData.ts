@@ -146,7 +146,7 @@ export const mockCourse: Course = {
           id: "l7",
           title: "Clase en vivo - Todo sobre el nacimiento.",
           description: "Clase en vivo el 28 de noviembre a las 19:30.",
-          videoUrl: "",
+          videoUrl: "gXhfuwaY3Cs",
           duration: "",
           order: 1,
           completed: false,
