@@ -186,7 +186,7 @@ export const mockCourse: Course = {
           id: "l8",
           title: "Clase en vivo - Vuelta a casa. Tu hogar preparado para el bebé y vos.",
           description: "Clase en vivo el 5 de diciembre a las 19:30.",
-          videoUrl: "",
+          videoUrl: "XHkOo6KtKEQ",
           duration: "",
           order: 1,
           completed: false,
