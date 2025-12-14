@@ -212,7 +212,7 @@ export const mockCourse: Course = {
           id: "l9",
           title: "Clase en vivo - Puerperio",
           description: "Una guía para transitar el postparto con herramientas. Clase en vivo el 12 de diciembre a las 19:30.",
-          videoUrl: "",
+          videoUrl: "yT25awotieo",
           duration: "",
           order: 1,
           completed: false,
@@ -237,31 +237,12 @@ export const mockCourse: Course = {
     },
     {
       id: "m7",
-      title: "Final",
-      description: "Preguntas y respuestas + cierre del acompañamiento",
-      order: 5,
-      lessons: [
-        {
-          id: "l10",
-          title: "Clase en vivo - Cierre del Acompañamiento",
-          description: "Clase de preguntas y respuestas para cerrar la preparación. Clase en vivo el 16 de diciembre a las 19:30",
-          videoUrl: "",
-          duration: "",
-          order: 1,
-          completed: false,
-          resources: [
-          ],
-        },
-      ],
-    },
-        {
-      id: "m8",
       title: "BONUS",
       description: "Módulo complementario",
       order: 5,
       lessons: [
         {
-          id: "l11",
+          id: "l10",
           title: "Meditación",
           description: "Meditación despedida de la panza grabada",
           videoUrl: "",
@@ -279,7 +260,7 @@ export const mockCourse: Course = {
           ],
         },
         {
-          id: "l12",
+          id: "l11",
           title: "Bitácora de la familia.",
           description: "Bitácora de la familia: manual imprimible de preparación completo para el nacimiento.",
           videoUrl: "",
@@ -297,7 +278,7 @@ export const mockCourse: Course = {
           ],
         },
         {
-          id: "l13",
+          id: "l12",
           title: "Pack de afirmaciones imprimibles para embarazo, nacimiento y puerperio.",
           description: "Pack de afirmaciones imprimibles para embarazo, nacimiento y puerperio.",
           videoUrl: "",
@@ -315,7 +296,7 @@ export const mockCourse: Course = {
           ],
         },
         {
-          id: "l14",
+          id: "l13",
           title: "Compras esenciales y presupuesto inteligente para el bebé.",
           description: "Masterclass.",
           videoUrl: "Rpj1D5ywTVM",
@@ -326,7 +307,7 @@ export const mockCourse: Course = {
           ],
         },
         {
-          id: "l15",
+          id: "l14",
           title: "Guía para la comunicación y acuerdos con la pareja y la familia.",
           description: "Para poder ser equipo de crianza, y además adaptarse a la nueva etapa sin generar distancia.",
           videoUrl: "",
@@ -344,21 +325,10 @@ export const mockCourse: Course = {
           ],
         },
         {
-          id: "l16",
+          id: "l15",
           title: "Minicurso: Primeros 30 días del bebé.",
           description: "Primeros 30 días del bebé: lactancia, colecho sí o no, decisiones importantes y cuidados básicos.",
           videoUrl: "RGQUYeC9F4g",
-          duration: "",
-          order: 1,
-          completed: false,
-          resources: [
-          ],
-        },
-        {
-          id: "l17",
-          title: "Cuidar a quien cuida: hablemos de puerperio",
-          description: "Taller en vivo online grupal.",
-          videoUrl: "",
           duration: "",
           order: 1,
           completed: false,
